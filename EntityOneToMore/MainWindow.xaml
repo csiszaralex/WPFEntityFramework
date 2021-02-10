@@ -1,0 +1,60 @@
+﻿<Window x:Class="EntityOneToMore.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EntityOneToMore"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Tanulók-->
+        <DataGrid x:Name="DG_tanulok" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Név" Binding="{Binding tanuloNev}"/>
+                <DataGridTextColumn Header="Születési Dátum" Binding="{Binding szuletesiDatum}"/>
+                <DataGridTextColumn Header="Osztály" Binding="{Binding Osztaly.osztalyNev}"/>
+                <DataGridTextColumn Header="Osztályfőnök" Binding="{Binding Osztaly.osztalyFonok}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!--Osztályok-->
+        <DataGrid Grid.Row="1" x:Name="DG_osztaly" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Osztály" Binding="{Binding osztalyNev}"/>
+                <DataGridTextColumn Header="Osztályfőnök" Binding="{Binding osztalyFonok}"/>
+                <DataGridTemplateColumn Header="Névsor" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ItemsControl ItemsSource="{Binding Tanulok}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding tanuloNev}"/>
+                                            <TextBlock Text="{Binding szuletesiDatum,StringFormat=Szül.dátum: \{0:yyyy.MM.dd\}}" Margin="5,0,0,0"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid x:Name="DG_lekerdezes" Grid.Column="1" AutoGenerateColumns="True" IsReadOnly="True">
+            
+        </DataGrid>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <ComboBox x:Name="CBO_osztalyok" Margin="5" Width="150" DisplayMemberPath="osztalyNev" SelectionChanged="CBO_osztalyok_SelectionChanged"/>
+        </StackPanel>
+    </Grid>
+</Window>
