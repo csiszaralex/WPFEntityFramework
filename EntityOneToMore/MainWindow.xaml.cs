@@ -26,17 +26,8 @@ namespace EntityOneToMore
         {
             InitializeComponent();
 
-            //Osztaly osztaly = new Osztaly() { osztalyNev = "9A", osztalyFonok = "Józsi" };
-            //context.Add<Osztaly>(osztaly);
-            //osztaly = new Osztaly() { osztalyNev = "13A", osztalyFonok = "Kowa" };
-            //context.Add<Osztaly>(osztaly);
-
-            //Tanulo tanulo = new Tanulo() { tanuloNev = "Béla", szuletesiDatum = DateTime.Parse("2001.01.01"), osztalyId = 1 };
-            //context.Add<Tanulo>(tanulo);
-            //tanulo = new Tanulo() { tanuloNev = "Cili", szuletesiDatum = DateTime.Parse("2005.03.22"), osztalyId = 1 };
-            //context.Add<Tanulo>(tanulo);
-            //tanulo = new Tanulo() { tanuloNev = "Kata", szuletesiDatum = DateTime.Parse("2003.04.13"), osztalyId = 2 };
-            //context.Add<Tanulo>(tanulo);
+            //AddOsztaly();
+            //AddTanulo();
 
             //context.SaveChanges();
 
@@ -44,10 +35,8 @@ namespace EntityOneToMore
             context.Osztaly.Load();
 
             DG_tanulok.ItemsSource = context.Tanulo.Local.ToObservableCollection();
-
             DG_osztaly.ItemsSource = context.Osztaly.Local.ToObservableCollection();
 
-            //CBO_osztalyok.ItemsSource = context.Osztaly.Local.ToObservableCollection();
             var o = context.Osztaly.Local.OrderBy(x => x.osztalyNev).ToList();
             o.Insert(0, new Osztaly() { osztalyId = -1, osztalyNev = "Kérem Válasszon!" });
             CBO_osztalyok.ItemsSource = o;
@@ -60,6 +49,25 @@ namespace EntityOneToMore
                               where t.Osztaly.osztalyId == ((Osztaly)CBO_osztalyok.SelectedItem).osztalyId
                               select new { t.tanuloNev, t.szuletesiDatum, t.Osztaly.osztalyNev }).ToList();
             DG_lekerdezes.ItemsSource = lekerdezes;
+        }
+
+        private void AddOsztaly() {
+            Osztaly osztaly = new Osztaly() { osztalyNev = "9A", osztalyFonok = "Józsi" };
+            context.Add<Osztaly>(osztaly);
+
+            osztaly = new Osztaly() { osztalyNev = "13A", osztalyFonok = "Kowa" };
+            context.Add<Osztaly>(osztaly);
+        }
+        private void AddTanulo()
+        {
+            Tanulo tanulo = new Tanulo() { tanuloNev = "Béla", szuletesiDatum = DateTime.Parse("2001.01.01"), osztalyId = 1 };
+            context.Add<Tanulo>(tanulo);
+
+            tanulo = new Tanulo() { tanuloNev = "Cili", szuletesiDatum = DateTime.Parse("2005.03.22"), osztalyId = 1 };
+            context.Add<Tanulo>(tanulo);
+
+            tanulo = new Tanulo() { tanuloNev = "Kata", szuletesiDatum = DateTime.Parse("2003.04.13"), osztalyId = 2 };
+            context.Add<Tanulo>(tanulo);
         }
     }
 }

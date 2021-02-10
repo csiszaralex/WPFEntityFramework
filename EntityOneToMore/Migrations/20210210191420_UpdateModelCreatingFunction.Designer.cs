@@ -3,14 +3,16 @@ using System;
 using EntityOneToMore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EntityOneToMore.Migrations
 {
     [DbContext(typeof(IskolaContext))]
-    partial class IskolaContextModelSnapshot : ModelSnapshot
+    [Migration("20210210191420_UpdateModelCreatingFunction")]
+    partial class UpdateModelCreatingFunction
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

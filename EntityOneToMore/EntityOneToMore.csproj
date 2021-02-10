@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210210190309_UpdateNewThings.cs" />
+    <Compile Remove="Migrations\20210210190309_UpdateNewThings.Designer.cs" />
+    <Compile Remove="Migrations\20210210190543_UpdateModelCreatinFunction.cs" />
+    <Compile Remove="Migrations\20210210190543_UpdateModelCreatinFunction.Designer.cs" />
+    <Compile Remove="Migrations\20210210190734_Remove-model-creating-function.cs" />
+    <Compile Remove="Migrations\20210210190734_Remove-model-creating-function.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.10">
       <PrivateAssets>all</PrivateAssets>
